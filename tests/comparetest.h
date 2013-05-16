@@ -14,7 +14,7 @@ signals:
 public slots:
 private slots:
   void min();
-  void min_failing();
+  //void min_failing();
 };
 DECLARE_TEST(CompareTest)
 #endif // COMPARETEST_H

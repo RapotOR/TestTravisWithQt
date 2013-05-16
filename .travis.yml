@@ -1,9 +1,11 @@
 ﻿language: cpp
 compiler:
   - gcc
-install:
-  - sudo apt-get update
-  - sudo apt-get install libqt5-dev qt5-qmake
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-add-repository -y ppa:beineri/opt-qt501
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq qmake qt5-meta-minimal
 script:
   - qmake -project
   - qmake tests/tests.pro

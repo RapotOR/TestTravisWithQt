@@ -8,6 +8,6 @@ install:
   - sudo apt-get -qq install libqt4-dev qt4-qmake cmake
 
 script:
-  - cmake -DCMAKE_BUILD_TYPE=Debug
+  - qmake QAutoTest.pro
   - make
   - tests/tests

@@ -3,11 +3,16 @@ before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 
+env:
+  - CONFIG=release QT=qt4
+  - CONFIG=release QT=qt5
+
 install:
   - sudo apt-get -qq update
-  - sudo apt-get -qq install libqt4-dev qt4-qmake cmake
+  - sh -c "if [ '$QT' = 'qt4' ]; then sudo apt-get -qq install libqt4-dev qt4-qmake cmake; fi"
+  - sh -c "if [ '$QT' = 'qt5' ]; then sudo apt-add-repository -y ppa:beineri/opt-qt502; sudo apt-get update -qq; sudo apt-get install -qq qt5-meta-minimal; fi"
 
 script:
-  - qmake QAutoTest.pro
+  - sh -c "if [ '$QT' = 'qt4' ] ; then export QMAKE=qmake; else export QMAKE=/opt/qt5/bin/qmake; fi; \$QMAKE QMAKE_CXX=$CXX CONFIG+=$CONFIG QAutoTest.pro"
   - make
   - tests/tests

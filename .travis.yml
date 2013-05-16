@@ -1,0 +1,19 @@
+﻿language: cpp
+compiler:
+  - gcc
+install:
+  - sudo apt-get update
+  - sudo apt-get install libqt5-dev qt5-qmake
+script:
+  - qmake -project
+  - qmake tests/tests.pro
+  - make
+branches:
+  only:
+    - master
+notifications:
+  recipients:
+    - cedric.lahouste@gmail.com
+  email:
+    on_success: change
+    on_failure: always

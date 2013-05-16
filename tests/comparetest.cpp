@@ -17,3 +17,9 @@ void CompareTest::min()
   QCOMPARE(a.min(1,   1), 1);
   QCOMPARE(a.min(-10,-5), -10);
 }
+
+void CompareTest::min_failing()
+{
+  Compare a;
+  QCOMPARE(a.min(1,   0), 1); // failing to have travis test.
+}

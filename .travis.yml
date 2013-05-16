@@ -1,21 +1,13 @@
 ﻿language: cpp
-compiler:
-  - gcc
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-add-repository -y ppa:beineri/opt-qt502
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq qt5-meta-minimal
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
+install:
+  - sudo apt-get -qq update
+  - sudo apt-get -qq install libqt4-dev qt4-qmake cmake
+
 script:
-  - qmake -project
-  - qmake tests/tests.pro
+  - cmake -DCMAKE_BUILD_TYPE=Debug
   - make
-branches:
-  only:
-    - master
-notifications:
-  recipients:
-    - cedric.lahouste@gmail.com
-  email:
-    on_success: change
-    on_failure: always
+  - tests/tests
